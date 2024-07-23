@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import appLogo from './res/logo1.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -15,31 +16,16 @@ function App() {
   })
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{title}</h1>
-      <div className="card">
-        <button onClick={() => {
-          setCount((count) => count + 1);
-          websocket_client.send("Current Count is: " + count);
-        }}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <head>
+        <link href="fonts/YuMincho.ttf" rel="stylesheet"/>
+      </head>
+      <body>
+        <img src={appLogo} className="logo" alt="logo" />
+        <span className='idol-message'>これからも、アイドル</span>
+          
+      </body>
+    </div>
   )
 }
 
