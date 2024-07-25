@@ -1,0 +1,39 @@
+<div class="container bg-slate-100">
+    web server
+    <div style="width: 100px; background: #33dd99">div1</div>
+    <div class="w-40 h-40 bg-red-100  px-10">div2</div>
+</div>
+<div class="w-20 border-4 border-black rounded-xl shadow-xl text-center font-light">div3</div>
+<!-- 
+  盒模型:
+  1 w-xx 宽度 h-xx 长度 bg-xx 背景
+    w-auto w-full w-[101px]
+    max-w-xx
+  2 p-xx padding (4xpx)
+    border-xx border (px) rounded shadow
+    m-xx margin 
+  3 位置 absolute top-xx left-xx z-xx
+
+  文字相关:
+  1 大小 颜色 对齐 text-3xl text-sky-100 text-center
+  2 行距 leading-
+  3 字体 粗细 font-
+ -->
+div4
+<div class="container bg-slate-100 flex">
+    <div class="flex-auto">div4</div>
+    <div class="flex-1 bg-purple-300 w-10 text-slate-400 font-bold">div5</div>
+</div>
+div6
+<div class="container bg-slate-100 grid grid-cols-3 gap-10">
+    <div class="bg-red-300 w-10">div4</div>
+    <div class=" bg-purple-300 w-10 text-slate-400 font-bold">div5</div>
+</div>
+<!-- 
+   flex(容器内一元分配)/grid相关:
+    flex-row,col
+    grow shrink 放缩 
+    basis-20 默认多少多少,如果有空间/无空间则放大缩小
+    gap 
+    加上grid横排
+  -->
