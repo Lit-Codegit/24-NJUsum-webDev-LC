@@ -6,5 +6,5 @@ export interface IUserOptions {
 }
 export interface LoginRequestBody {
   username: string;
-  password: string;
+  passwd: string;
 }

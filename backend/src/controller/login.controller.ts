@@ -1,30 +1,33 @@
 
-import { Controller, Post, Provide } from '@midwayjs/core';
+import { Body, Controller, Post, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { AuthService } from '../service/login.service';
 import { LoginRequestBody } from '../interface';
+import * as fs from 'fs';
 
 @Provide()
 @Controller('/')
 export class LoginController {
-    constructor(private authService: AuthService) { }
-
     @Post('/login')
-    async login(ctx: Context) {
-        const { username, password } = ctx.request.body as LoginRequestBody;
+    async login(@Body() body: LoginRequestBody, ctx: Context) {
+        // TODO: 业务分离
+        const { username, passwd } = body;
+        // 用于将JSON字符串解析为JavaScript对象
+        const users = JSON.parse(fs.readFileSync('../users.json', 'utf-8'));
+        const userFind = users.find(u => u.username === username && u.passwd === passwd);
 
-        if (this.authService.authenticate(username, password)) {
-            // 设置cookie或其他身份验证的响应头
-
-            // 发送重定向响应到/user路由
-            ctx.status = 302;
-            ctx.set('Location', '/user');
-        } else {
-            ctx.status = 400;
+        if (userFind) {
+            // set cookie??
+            ctx.status = 200;
             ctx.body = {
-                code: 400,
-                message: '用户名或密码错误',
-            };
+                success: true,
+                message: 'login'
+            }
+        } else {
+                ctx.status = 401;
+                ctx.body = {
+                    success: false,
+                    message: 'failed'
+                }
+            }
         }
     }
-}
