@@ -10,33 +10,19 @@ function Login() {
     const [username, setUsername] = useState("");
     const [error, setError] = useState('');
     const client = axios.default;
-    const base = "http://127.0.0.1:7002"
+    const base = "http://127.0.0.1:7002/login"
 
     const handleSubmit = async (e) => {
         console.log('in handle')
         e.preventDefault();
 
-        // try {
-        //     const response = await axios.post('', {
-        //         username,
-        //         passwd
-        //     });
-        //     console.log('already post')
-        //     if (response.data.success) {
-        //         // window.location.href = '/mainview'
-        //         console.log('success')
-        //     } else {
-        //         setError('无账户');
-        //     }
-        // } catch (error) {
-        //     setError('网络请求失败')
-        // }
-        axios.post('/login', {
+        client.post(base, {
             username: username,
             passwd: passwd
         })
             .then((response) => {
-                console.log(response)
+                console.log(response.data)
+                // todo: 这个还是空的, 为什么?
             })
             .catch((error) => {
                 console.log(error)

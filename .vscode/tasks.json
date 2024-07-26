@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "frontend",
+			"problemMatcher": [],
+			"label": "frontend",
+			"detail": "vite"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "backend",
+			"problemMatcher": [],
+			"label": "backend",
+			"detail": "cross-env NODE_ENV=local mwtsc --watch --run @midwayjs/mock/app.js"
+		},
+		{
+			"label": "sequence",
+			"type": "shell",
+			"command": "echo 'Running sequence task'",
+			"dependsOn": [
+				"frontend",
+				"backend"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

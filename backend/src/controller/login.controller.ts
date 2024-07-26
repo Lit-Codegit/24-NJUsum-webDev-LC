@@ -3,6 +3,7 @@ import { Body, Controller, Post, Provide } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import { LoginRequestBody } from '../interface';
 import * as fs from 'fs';
+import { LoginService } from '../service/login.service';
 
 @Provide()
 @Controller('/')
@@ -12,7 +13,7 @@ export class LoginController {
         // TODO: 业务分离
         const { username, passwd } = body;
         // 用于将JSON字符串解析为JavaScript对象
-        const users = JSON.parse(fs.readFileSync('../users.json', 'utf-8'));
+        const users = JSON.parse(fs.readFileSync('./src/users.json', 'utf-8'));
         const userFind = users.find(u => u.username === username && u.passwd === passwd);
 
         if (userFind) {

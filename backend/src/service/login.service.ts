@@ -1,9 +1,23 @@
 import { Provide } from '@midwayjs/core';
-
+import { LoginRequestBody } from '../interface';
+import * as fs from 'fs';
 @Provide()
 export class AuthService {
-    // 示例认证方法，实际应用中应替换为真实的认证逻辑
-    public authenticate(username: string, password: string): boolean {
-        return username === 'admin' && password === 'password';
+    async login(body: LoginRequestBody): Promise<{ success: boolean; message: string }> {
+        const { username, passwd } = body;
+        const users = JSON.parse(fs.readFileSync('./src/users.json', 'utf-8'));
+        const userFind = users.find(u => u.username === username && u.passwd === passwd);
+
+        if (userFind) {
+            return {
+                success: true,
+                message: 'login'
+            };
+        } else {
+            return {
+                success: false,
+                message: 'failed'
+            };
+        }
     }
 }
