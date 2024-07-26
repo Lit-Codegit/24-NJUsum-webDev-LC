@@ -9,6 +9,7 @@ function Login() {
     const [passwd, setPasswd] = useState("");
     const [username, setUsername] = useState("");
     const [error, setError] = useState('');
+    // 创建个对象
     const client = axios.default;
     const base = "http://127.0.0.1:7002/login"
 
@@ -21,8 +22,17 @@ function Login() {
             passwd: passwd
         })
             .then((response) => {
-                console.log(response.data)
-                // todo: 这个还是空的, 为什么?
+                response.data;
+                console.log(response.data);
+                
+                if (response.data.success) {
+                    const token = true;
+                    // 存储token，通常可以存储在localStorage或sessionStorage中
+                    localStorage.setItem('authToken', token);
+                    history.push('/mainview');
+                } else {
+                    alert('登录失败!')
+                }
             })
             .catch((error) => {
                 console.log(error)
@@ -31,7 +41,7 @@ function Login() {
         // TODO: 在原界面上浮显示异常
 }
 
-    console.log('ready')
+    // console.log('ready')
     return (
         <div>
             <div>

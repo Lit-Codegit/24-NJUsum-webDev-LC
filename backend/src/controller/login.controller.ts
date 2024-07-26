@@ -1,34 +1,21 @@
 
-import { Body, Controller, Post, Provide } from '@midwayjs/core';
-import { Context } from '@midwayjs/koa';
+import { Body, Controller, Inject, Post} from '@midwayjs/core';
+// import { Context } from '@midwayjs/koa';
 import { LoginRequestBody } from '../interface';
-import * as fs from 'fs';
 import { LoginService } from '../service/login.service';
 
-@Provide()
 @Controller('/')
 export class LoginController {
-    @Post('/login')
-    async login(@Body() body: LoginRequestBody, ctx: Context) {
-        // TODO: 业务分离
-        const { username, passwd } = body;
-        // 用于将JSON字符串解析为JavaScript对象
-        const users = JSON.parse(fs.readFileSync('./src/users.json', 'utf-8'));
-        const userFind = users.find(u => u.username === username && u.passwd === passwd);
+    
+    // 注入,相当于创建一个实例,作为成员
+    @Inject()
+    loginService: LoginService;
 
-        if (userFind) {
-            // set cookie??
-            ctx.status = 200;
-            ctx.body = {
-                success: true,
-                message: 'login'
-            }
-        } else {
-                ctx.status = 401;
-                ctx.body = {
-                    success: false,
-                    message: 'failed'
-                }
-            }
-        }
+    @Post('/login')
+    async login(@Body() body: LoginRequestBody): Promise<{ success: boolean; message: string }> {
+        
+        const result = await this.loginService.login(body);
+
+        return result;
     }
+}

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import * as util_request from './request/util.request'
+
 import * as websocket_client from './request/client.websocket'
 import Login from './login'
+import MainView from './mainview'
 // 这里不知为何不能用{Login}
 
 function App() {
