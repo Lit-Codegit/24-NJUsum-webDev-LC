@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import * as util_request from './request/util.request'
 import * as axios from 'axios'
 
 
